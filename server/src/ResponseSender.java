@@ -5,11 +5,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ResponseSender {
 
-    private final RequestHandler requestHandler;
-
-    public ResponseSender(RequestHandler requestHandler) {
-        this.requestHandler = requestHandler;
-    }
+    private final RequestHandler requestHandler = new RequestHandler();
 
     public void send() throws IOException {
         var fcgiInterface = new FCGIInterface();
@@ -21,6 +17,7 @@ public class ResponseSender {
                     "isHit": %s
                     }
                     """.formatted(result ? "true" : "false");
+
             var httpResponse = """
                     HTTP/1.1 200 OK
                     Content-Type: application/json

@@ -2,8 +2,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        RequestHandler requestHandler = new RequestHandler();
-        ResponseSender responseSender = new ResponseSender(requestHandler);
+        ResponseSender responseSender = new ResponseSender();
 
         while (true) {
             responseSender.send();

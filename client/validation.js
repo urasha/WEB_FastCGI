@@ -7,6 +7,11 @@ const hitResult = {
     false: "Нет"
 };
 
+const hitResultClass = {
+    true: "hit-true",
+    false: "hit-false"
+}
+
 async function validateInput(event) {
     event.preventDefault();
 
@@ -33,7 +38,7 @@ async function validateInput(event) {
 
 
     fetch(url, requestData).then(response => response.json()).then(data => {
-        addDataRow(xResult, yResult, rResult, hitResult[data["isHit"]]);
+        addDataRow(xResult, yResult, rResult, data["isHit"]);
     });
 }
 
@@ -46,11 +51,12 @@ function addDataRow(x, y, r, hit) {
     }
 
     let newRow = document.createElement("tr");
+
     newRow.innerHTML = `
         <td>${x}</td>
         <td>${y}</td>
         <td>${r}</td>
-        <td>${hit}</td>
+        <td class="${hitResultClass[hit]}">${hitResult[hit]}</td>
     `;
 
     tableBody.appendChild(newRow);

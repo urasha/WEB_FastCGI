@@ -131,11 +131,25 @@
             stroke-width: 2px;
             stroke: black;
         }
+
+        table {
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #eae6e6;
+        }
     </style>
 </head>
 
 <body>
-<form method="POST" action="#">
+<form method="POST">
     <header>
         Нестеров Владислав Алексеевич P3210 488123
     </header>
@@ -218,7 +232,22 @@
     </div>
 
     <div id="result-wrapper">
-        <em>Нет данных по попаданиям</em>
+        <table id="data-table">
+            <thead>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>R</th>
+                <th>Попала ли точка</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr id="no-data">
+                <td colspan="4">Нет данных</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </form>
 </body>

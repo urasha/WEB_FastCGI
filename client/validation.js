@@ -2,6 +2,11 @@ const X_ERROR = "Ошибка валидации X!";
 const Y_ERROR = "Ошибка валидации Y!";
 const R_ERROR = "Ошибка валидации R!";
 
+const hitResult = {
+    true: "Да",
+    false: "Нет"
+};
+
 async function validateInput(event) {
     event.preventDefault();
 
@@ -28,9 +33,27 @@ async function validateInput(event) {
 
 
     fetch(url, requestData).then(response => response.json()).then(data => {
-        // TODO: GET RESPONSE AND ADD DATA TO TABLE IN HTML
-        console.log(data);
+        addDataRow(xResult, yResult, rResult, hitResult[data["isHit"]]);
     });
+}
+
+function addDataRow(x, y, r, hit) {
+    let tableBody = document.querySelector("#data-table tbody");
+    let noDataRow = document.getElementById("no-data");
+
+    if (noDataRow) {
+        noDataRow.remove();
+    }
+
+    let newRow = document.createElement("tr");
+    newRow.innerHTML = `
+        <td>${x}</td>
+        <td>${y}</td>
+        <td>${r}</td>
+        <td>${hit}</td>
+    `;
+
+    tableBody.appendChild(newRow);
 }
 
 function getValidatedX() {

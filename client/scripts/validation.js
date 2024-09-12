@@ -38,11 +38,11 @@ async function validateInput(event) {
 
 
     fetch(url, requestData).then(response => response.json()).then(data => {
-        addDataRow(xResult, yResult, rResult, data["isHit"]);
+        addDataRow(xResult, yResult, rResult, data["isHit"], data["time"]);
     });
 }
 
-function addDataRow(x, y, r, hit) {
+function addDataRow(x, y, r, hit, time) {
     let tableBody = document.querySelector("#data-table tbody");
     let noDataRow = document.getElementById("no-data");
 
@@ -56,6 +56,8 @@ function addDataRow(x, y, r, hit) {
         <td>${x}</td>
         <td>${y}</td>
         <td>${r}</td>
+        <td>${new Date().toLocaleString()}</td>
+        <td>${time} секунд</td>
         <td class="${hitResultClass[hit]}">${hitResult[hit]}</td>
     `;
 

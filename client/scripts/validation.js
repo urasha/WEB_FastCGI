@@ -1,16 +1,17 @@
-const X_ERROR = "Ошибка валидации X!";
-const Y_ERROR = "Ошибка валидации Y!";
-const R_ERROR = "Ошибка валидации R!";
-
-const hitResult = {
-    true: "Да",
-    false: "Нет"
+const MESSAGES = {
+    X_ERROR: "Ошибка валидации X!",
+    Y_ERROR: "Ошибка валидации Y!",
+    R_ERROR: "Ошибка валидации R!",
+    HIT_RESULT: {
+        true: "Да",
+        false: "Нет"
+    },
+    HIT_RESULT_CLASS: {
+        true: "hit-true",
+        false: "hit-false"
+    },
+    API_URL: "/api/"
 };
-
-const hitResultClass = {
-    true: "hit-true",
-    false: "hit-false"
-}
 
 async function validateInput(event) {
     event.preventDefault();
@@ -23,23 +24,23 @@ async function validateInput(event) {
         return;
     }
 
-    const url = "/api/";
     const requestData = {
-        "method": "POST",
-        "headers": {
+        method: "POST",
+        headers: {
             "Content-Type": "application/json",
         },
-        "body": JSON.stringify({
+        body: JSON.stringify({
             x: xResult,
             y: yResult,
             r: rResult
         })
     };
 
-
-    fetch(url, requestData).then(response => response.json()).then(data => {
-        addDataRow(xResult, yResult, rResult, data["isHit"], data["time"]);
-    });
+    fetch(MESSAGES.API_URL, requestData)
+        .then(response => response.json())
+        .then(data => {
+            addDataRow(xResult, yResult, rResult, data["isHit"], data["time"]);
+        });
 }
 
 function addDataRow(x, y, r, hit, time) {
@@ -58,7 +59,7 @@ function addDataRow(x, y, r, hit, time) {
         <td>${r}</td>
         <td>${new Date().toLocaleString()}</td>
         <td>${time} секунд</td>
-        <td class="${hitResultClass[hit]}">${hitResult[hit]}</td>
+        <td class="${MESSAGES.HIT_RESULT_CLASS[hit]}">${MESSAGES.HIT_RESULT[hit]}</td>
     `;
 
     tableBody.appendChild(newRow);
@@ -68,11 +69,10 @@ function getValidatedX() {
     const possibleXValues = [-4, -3, -2, -1, 0, 1, 2, 3, 4];
 
     let xInput = document.querySelector('input[name="x-value"]:checked');
-
     let x = xInput == null ? NaN : parseInt(xInput.value);
 
-    let validationResult =  !isNaN(x) && possibleXValues.includes(x);
-    document.querySelector("#x-error").textContent = validationResult ? "" : X_ERROR;
+    let validationResult = !isNaN(x) && possibleXValues.includes(x);
+    document.querySelector("#x-error").textContent = validationResult ? "" : MESSAGES.X_ERROR;
 
     return validationResult ? x : null;
 }
@@ -82,7 +82,7 @@ function getValidatedY() {
     let y = parseFloat(yInput.value);
 
     let validationResult = !isNaN(y) && y <= 5 && y >= -5;
-    document.querySelector("#y-error").textContent = validationResult ? "" : Y_ERROR;
+    document.querySelector("#y-error").textContent = validationResult ? "" : MESSAGES.Y_ERROR;
 
     return validationResult ? y : null;
 }
@@ -94,7 +94,7 @@ function getValidatedR() {
     let r = parseInt(rInput.value);
 
     let validationResult = !isNaN(r) && possibleRValues.includes(r);
-    document.querySelector("#r-error").textContent = validationResult ? "" : R_ERROR;
+    document.querySelector("#r-error").textContent = validationResult ? "" : MESSAGES.R_ERROR;
 
     return validationResult ? r : null;
 }

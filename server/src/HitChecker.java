@@ -13,7 +13,7 @@ public class HitChecker {
     }
 
     private static boolean checkCircle(double r, double x, double y) {
-        return (x * x + y * y) <= r * r;
+        return ((x * x + y * y) <= r * r) && (x <= 0 && y <= 0);
     }
 
     private static boolean checkTriangle(double r, double x, double y) {

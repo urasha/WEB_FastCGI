@@ -13,12 +13,10 @@ const MESSAGES = {
     API_URL: "/api/"
 };
 
-async function validateInput(event) {
-    event.preventDefault();
-
-    const xResult = getValidatedX(event);
-    const yResult = getValidatedY(event);
-    const rResult = getValidatedR(event);
+async function validateInput() {
+    const xResult = getValidatedX();
+    const yResult = getValidatedY();
+    const rResult = getValidatedR();
 
     if (xResult == null || yResult == null || rResult == null) {
         return;

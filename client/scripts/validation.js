@@ -13,7 +13,7 @@ const MESSAGES = {
     API_URL: "/api/"
 };
 
-async function validateInput() {
+function validateInput() {
     const xResult = getValidatedX();
     const yResult = getValidatedY();
     const rResult = getValidatedR();

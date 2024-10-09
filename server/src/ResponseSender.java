@@ -13,7 +13,7 @@ public class ResponseSender {
             // calculate script running time
             double startTime = System.currentTimeMillis();
 
-            boolean result = requestHandler.handle();
+            ResponseStatus result = requestHandler.handle();
 
             double totalTime = (System.currentTimeMillis() - startTime) / 1000;
 
@@ -23,21 +23,40 @@ public class ResponseSender {
         }
     }
 
-    private String getHttpResponse(boolean result, double totalTime) {
-        var content = """
-                {
-                "isHit": %s,
-                "time": %s
-                }
-                """.formatted(result ? "true" : "false", String.valueOf(totalTime));
+    private String getHttpResponse(ResponseStatus result, double totalTime) {
+        String content;
+        String statusLine;
+
+        switch (result) {
+            case SUCCESS:
+            case HIT_FAILED:
+                content = """
+                        {
+                        "isHit": %s,
+                        "time": %s
+                        }
+                        """.formatted(result.isHit(), String.valueOf(totalTime));
+                statusLine = "HTTP/1.1 200 OK";
+                break;
+
+            case VALIDATION_FAILED:
+            default:
+                content = """
+                        {
+                        "error": "Validation Error"
+                        }
+                        """;
+                statusLine = "HTTP/1.1 400 Bad Request";
+                break;
+        }
 
         var httpResponse = """
-                HTTP/1.1 200 OK
+                %s
                 Content-Type: application/json
                 Content-Length: %d
                                    
                 %s
-                """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+                """.formatted(statusLine, content.getBytes(StandardCharsets.UTF_8).length, content);
 
         return httpResponse;
     }

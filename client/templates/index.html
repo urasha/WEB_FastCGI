@@ -182,15 +182,15 @@
         <div class="x-input">
             <fieldset>
                 <legend class="highlighted">Выберите X:</legend>
-                <input type="checkbox" value="-4" name="x-value"> -4 <br>
-                <input type="checkbox" value="-3" name="x-value"> -3 <br>
-                <input type="checkbox" value="-2" name="x-value"> -2 <br>
-                <input type="checkbox" value="-1" name="x-value"> -1 <br>
-                <input type="checkbox" value="0" name="x-value"> 0 <br>
-                <input type="checkbox" value="1" name="x-value"> 1 <br>
-                <input type="checkbox" value="2" name="x-value"> 2 <br>
-                <input type="checkbox" value="3" name="x-value"> 3 <br>
-                <input type="checkbox" value="4" name="x-value"> 4 <br>
+                <input type="checkbox" value="-4" name="x-value" onclick="getValidatedX()"> -4 <br>
+                <input type="checkbox" value="-3" name="x-value" onclick="getValidatedX()"> -3 <br>
+                <input type="checkbox" value="-2" name="x-value" onclick="getValidatedX()"> -2 <br>
+                <input type="checkbox" value="-1" name="x-value" onclick="getValidatedX()"> -1 <br>
+                <input type="checkbox" value="0" name="x-value" onclick="getValidatedX()"> 0 <br>
+                <input type="checkbox" value="1" name="x-value" onclick="getValidatedX()"> 1 <br>
+                <input type="checkbox" value="2" name="x-value" onclick="getValidatedX()"> 2 <br>
+                <input type="checkbox" value="3" name="x-value" onclick="getValidatedX()"> 3 <br>
+                <input type="checkbox" value="4" name="x-value" onclick="getValidatedX()"> 4 <br>
                 <span id="x-error" class="error"></span>
             </fieldset>
         </div>
@@ -217,7 +217,9 @@
             </fieldset>
         </div>
 
-        <input type="submit" id="submit-button" class="highlighted" value="Проверить попадание" />
+        <button id="submit-button" class="highlighted">
+            Проверить попадание
+        </button>
 
         <div id="graph">
             <svg width="300" height="300">

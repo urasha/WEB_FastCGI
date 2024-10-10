@@ -35,13 +35,7 @@ function validateInput() {
     };
 
     fetch(MESSAGES.API_URL, request)
-    .then(response => {
-        if (response.status === 400) {
-            console.error("Validation error: " + response.statusText);
-            return; 
-        }
-        return response.json(); 
-    })
+    .then(response => response.json())
     .then(data => {
         if (data) {
             addDataRow(xResult, yResult, rResult, data["isHit"], data["time"]);
@@ -111,7 +105,5 @@ function getValidatedR() {
     return validationResult ? r : null;
 }
 
-
 const submitButton = document.querySelector("#submit-button");
 submitButton.addEventListener("click", (event) => validateInput(event));
-

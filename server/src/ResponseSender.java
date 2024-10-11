@@ -26,6 +26,7 @@ public class ResponseSender {
     private String getHttpResponse(ResponseStatus result, double totalTime) {
         String content;
         String statusLine;
+        String statusCode;
 
         switch (result) {
             case SUCCESS:
@@ -37,6 +38,7 @@ public class ResponseSender {
                         }
                         """.formatted(result.isHit(), String.valueOf(totalTime));
                 statusLine = "HTTP/1.1 200 OK";
+                statusCode = "200";
                 break;
 
             case VALIDATION_FAILED:
@@ -47,6 +49,7 @@ public class ResponseSender {
                         }
                         """;
                 statusLine = "HTTP/1.1 400 Bad Request";
+                statusCode = "400";
                 break;
         }
 
@@ -54,9 +57,10 @@ public class ResponseSender {
                 %s
                 Content-Type: application/json
                 Content-Length: %d
+                Status: %s
                                    
                 %s
-                """.formatted(statusLine, content.getBytes(StandardCharsets.UTF_8).length, content);
+                """.formatted(statusLine, content.getBytes(StandardCharsets.UTF_8).length, statusCode, content);
 
         return httpResponse;
     }

@@ -8,6 +8,7 @@ In root directory write in terminal:
 ### Stack
 - FastCGI Java API
 - HTML + CSS + JS
+- Maven
 - Nginx + Docker
 
 ### Design

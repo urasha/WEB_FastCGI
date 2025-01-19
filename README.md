@@ -3,7 +3,9 @@
 ### Usage
 In root directory write in terminal:
 
-```docker compose up --build```
+```
+docker compose up --build
+```
 
 ### Stack
 - FastCGI Java API

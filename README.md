@@ -10,7 +10,6 @@ docker compose up --build
 ### Stack
 - FastCGI Java API
 - HTML + CSS + JS
-- Maven
 - Nginx + Docker
 
 ### Design
